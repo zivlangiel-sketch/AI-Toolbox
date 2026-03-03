@@ -1,0 +1,254 @@
+# LM Studio – Long Method QA Exercise
+
+## 🎯 Goal
+Build a Python script using the **manual HTTP method (requests)** that:
+
+1. Sends a prompt to LM Studio
+2. Extracts the model response
+3. Performs basic QA validations
+
+This exercise is designed to strengthen:
+- REST understanding
+- JSON parsing
+- Error handling
+- QA thinking
+
+---
+
+# ✅ Step 0 – Make Sure Server Is Running
+
+1. Open LM Studio
+2. Load a model
+3. Click **Start Server**
+4. Default server:
+
+http://localhost:1234
+
+Test in browser:
+
+http://localhost:1234/v1/models
+
+If JSON appears → server is running.
+
+---
+
+# ✅ Step 1 – Create Python File
+
+Create a new file:
+
+lm_long_exercise.py
+
+---
+
+# ✅ Step 2 – Imports
+
+You will need:
+
+- requests (HTTP calls)
+- time (optional – for latency measurement)
+
+---
+
+# ✅ Step 3 – Define Constants (Top of File)
+
+Define these variables:
+
+- BASE_URL → "http://localhost:1234"
+- ENDPOINT → BASE_URL + "/v1/chat/completions"
+- MODEL_NAME → (exact model ID from /v1/models)
+- PROMPT → "What is the capital of Thailand? Answer in one word."
+- EXPECTED_KEYWORD → "Bangkok"
+
+Why?
+So you can change inputs without touching logic.
+
+---
+
+# ✅ Step 4 – Build Payload
+
+LM Studio expects:
+
+{
+  "model": "MODEL_NAME",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your question"
+    }
+  ]
+}
+
+Build it step by step:
+
+1. Create empty dictionary → payload
+2. Add "model"
+3. Add empty list for "messages"
+4. Create message dictionary
+5. Add "role"
+6. Add "content"
+7. Append message into messages list
+
+---
+
+# ✅ Step 5 – Send POST Request
+
+Use:
+
+requests.post(ENDPOINT, json=payload)
+
+Optional (Latency):
+
+- Save start_time before request
+- Save end_time after request
+- Print total duration
+
+---
+
+# ✅ Step 6 – Check Status Code
+
+Before parsing JSON:
+
+If response.status_code != 200:
+- Print status code
+- Print response.text
+- Stop execution
+
+Why?
+Never assume success.
+
+---
+
+# ✅ Step 7 – Convert Response to JSON
+
+data = response.json()
+
+Important:
+Always call json() with parentheses.
+
+Wrong:
+response.json
+
+Correct:
+response.json()
+
+---
+
+# ✅ Step 8 – Extract Model Content
+
+Response structure:
+
+data
+ └── "choices" (list)
+      └── [0]
+           └── "message"
+                └── "content"
+
+Extract:
+
+content = data["choices"][0]["message"]["content"]
+
+Print it clearly.
+
+---
+
+# ✅ Step 9 – QA Checks (Think Like a Tester)
+
+### Check 1 – Not Empty
+- Ensure content.strip() is not empty
+- If empty → print FAILED: Empty response
+
+### Check 2 – Not Too Long
+- Ensure len(content) < 800
+- If too long → print FAILED: Response too long
+
+### Check 3 – Keyword Present
+- Convert both content and EXPECTED_KEYWORD to lowercase
+- Check if keyword exists in content
+- If not → print FAILED: Keyword missing
+
+---
+
+# ✅ Step 10 – Bonus: Usage / Tokens
+
+If "usage" exists in data:
+
+Print:
+
+data["usage"]
+
+This shows:
+- prompt_tokens
+- completion_tokens
+- total_tokens
+
+---
+
+# 🧠 Key Python Concepts Used
+
+Dictionary:
+{}
+dict["key"]
+
+List:
+[]
+list.append(item)
+list[0]
+
+Function Call:
+function()
+
+Not:
+function[]
+
+---
+
+# 🔍 Debugging Guide
+
+Connection refused → server not running  
+Model not found → wrong MODEL_NAME  
+KeyError → print(data) and inspect structure  
+Unexpected content → print full JSON
+
+---
+
+# 🏗 Logical Flow
+
+1. Start server
+2. Define constants
+3. Build payload
+4. Send POST
+5. Check status
+6. Parse JSON
+7. Extract content
+8. Run QA checks
+9. Print results
+
+---
+
+# 🎓 What This Exercise Trains
+
+- Real API communication
+- Error handling discipline
+- JSON navigation
+- Structured validation
+- AI QA mindset
+- Manual model evaluation
+- Debug thinking
+
+---
+
+# 🚀 After You Finish
+
+Next possible upgrades:
+
+- Add try/except blocks
+- Add multiple prompts in loop
+- Compare two models (regression test)
+- Measure latency distribution
+- Add system role
+- Add temperature parameter
+- Convert to pytest test case
+
+---
+
+END

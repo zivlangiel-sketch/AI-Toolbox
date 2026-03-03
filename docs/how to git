@@ -1,0 +1,186 @@
+
+# 🚀 Professional Guide: VS Code + Git + Python (venv)
+
+A clean, structured, professional workflow for working with:
+- VS Code
+- Git
+- GitHub
+- Python virtual environments (venv)
+- requirements.txt
+
+---
+
+## 1. Open Your Project Correctly in VS Code
+
+1. Open VS Code
+2. Click **File → Open Folder**
+3. Select your project root folder (example: AI-Toolbox)
+
+Always open the root folder — not a subfolder.
+
+---
+
+## 2. Verify Git Installation
+
+Open the VS Code terminal and run:
+
+    git --version
+
+If you see a version number, Git is installed correctly.
+
+---
+
+## 3. Initialize a Local Repository
+
+Inside your project root:
+
+    git init
+
+Verify:
+
+    git status
+
+---
+
+## 4. Create a Proper .gitignore (Critical Step)
+
+Create a file named:
+
+    .gitignore
+
+Add:
+
+    # Python cache
+    __pycache__/
+    *.pyc
+    *.pyo
+    *.pyd
+    *.log
+
+    # Virtual environments
+    venv/
+    .venv/
+    */venv/
+    */.venv/
+
+    # VS Code
+    .vscode/
+
+    # OS files
+    .DS_Store
+    Thumbs.db
+
+    # Environment variables / secrets
+    .env
+    *.env
+
+Never upload your venv folder to Git.
+
+---
+
+## 5. Create and Activate a Virtual Environment
+
+Create:
+
+    python -m venv venv
+
+Activate (PowerShell):
+
+    .\venv\Scripts\Activate
+
+If inside a subfolder:
+
+    cd lesson01
+    .\venv\Scripts\Activate
+
+Verify:
+
+    where python
+
+The first result should point to your venv.
+
+---
+
+## 6. Create requirements.txt
+
+After installing packages:
+
+    pip freeze > requirements.txt
+
+This allows environment recreation.
+
+---
+
+## 7. First Commit
+
+    git status
+    git add .
+    git commit -m "Initial commit"
+
+---
+
+## 8. Connect to GitHub
+
+Create a repository on GitHub (do NOT initialize with README).
+
+Then:
+
+    git branch -M main
+    git remote add origin YOUR_REPO_URL_HERE
+    git push -u origin main
+
+---
+
+## 9. Daily Workflow
+
+    git status
+    git add .
+    git commit -m "Describe changes clearly"
+    git push
+
+Small, clear commits are best.
+
+---
+
+## 10. Clone & Restore on Another Machine
+
+    git clone REPO_URL
+    cd PROJECT_FOLDER
+    python -m venv venv
+    .\venv\Scripts\Activate
+    pip install -r requirements.txt
+
+---
+
+## Recommended Project Structure
+
+    AI-Toolbox/
+    ├── venv/                (ignored by git)
+    ├── lesson01/
+    │   └── script.py
+    ├── requirements.txt
+    ├── .gitignore
+    └── README.md
+
+---
+
+## Useful Debug Commands
+
+Check active Python:
+
+    where python
+
+Check interpreter path:
+
+    python -c "import sys; print(sys.executable)"
+
+---
+
+## Final Summary
+
+venv isolates dependencies  
+Git tracks history  
+GitHub backs up and collaborates  
+requirements.txt recreates environments  
+
+If configured correctly — you're working like a professional developer.
