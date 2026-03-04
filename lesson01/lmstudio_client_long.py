@@ -19,3 +19,4 @@ print(data)
 content = data["choices"][0]["message"]["content"]
 print("~~~~~~~~~~~~~~~~~~~")
 print(content)
+print("end")
