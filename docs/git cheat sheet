@@ -2,7 +2,18 @@
 # Git Cheat Sheet for Developers
 A practical reference of the most useful Git commands and workflow tips.
 
----
+## ⚡ Most Common Git Workflow
+
+git status
+git add .
+git commit -m "Describe change"
+git push
+
+## 📜 View Commit History
+git log --oneline --graph --decorate --all
+
+## 🔍 See File Changesgit diff
+git diff
 
 # 1. Basic Repository Setup
 
@@ -190,7 +201,7 @@ Check remote repositories:
     └── README.md
 
 ---
-
+git status
 # Summary
 
 Git workflow simplified:
