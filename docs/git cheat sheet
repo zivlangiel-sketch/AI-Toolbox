@@ -1,0 +1,206 @@
+
+# Git Cheat Sheet for Developers
+A practical reference of the most useful Git commands and workflow tips.
+
+---
+
+# 1. Basic Repository Setup
+
+Initialize a repository:
+
+    git init
+
+Check repository status:
+
+    git status
+
+Add files to staging:
+
+    git add .
+
+Add a specific file:
+
+    git add filename.py
+
+Create a commit:
+
+    git commit -m "Describe your change"
+
+View commit history:
+
+    git log
+
+Compact history view:
+
+    git log --oneline
+
+---
+
+# 2. Inspect Changes
+
+Show changes not yet staged:
+
+    git diff
+
+Show changes staged for commit:
+
+    git diff --staged
+
+Show what changed in the last commit:
+
+    git show
+
+---
+
+# 3. Branching (Core Professional Workflow)
+
+List branches:
+
+    git branch
+
+Create a branch:
+
+    git branch feature-name
+
+Create and switch branch:
+
+    git checkout -b feature-name
+
+Switch branch:
+
+    git checkout main
+
+Merge branch into current branch:
+
+    git merge feature-name
+
+Delete a branch:
+
+    git branch -d feature-name
+
+---
+
+# 4. Working With GitHub (Remote Repositories)
+
+Add remote repository:
+
+    git remote add origin REPO_URL
+
+Rename branch to main:
+
+    git branch -M main
+
+Push code to GitHub:
+
+    git push -u origin main
+
+Push updates:
+
+    git push
+
+Pull latest changes:
+
+    git pull
+
+Fetch changes without merging:
+
+    git fetch
+
+---
+
+# 5. Professional Daily Workflow
+
+Typical workflow used by developers:
+
+    git status
+    git add .
+    git commit -m "Explain the change"
+    git push
+
+---
+
+# 6. Git History Visualization (Very Useful)
+
+Visual history graph:
+
+    git log --oneline --graph --decorate --all
+
+Create a shortcut for this command:
+
+    git config --global alias.tree "log --oneline --graph --decorate --all"
+
+Then use:
+
+    git tree
+
+This gives you a visual map of your repository history.
+
+---
+
+# 7. Undoing Mistakes
+
+Unstage a file:
+
+    git restore --staged filename.py
+
+Discard local changes:
+
+    git restore filename.py
+
+Reset last commit but keep changes:
+
+    git reset --soft HEAD~1
+
+Reset last commit completely:
+
+    git reset --hard HEAD~1
+
+---
+
+# 8. Useful Debug Commands
+
+Check active branch:
+
+    git branch
+
+Check remote repositories:
+
+    git remote -v
+
+---
+
+# 9. Best Practices
+
+✔ Make small commits  
+✔ Write clear commit messages  
+✔ Use branches for new features  
+✔ Never commit secrets (.env files)  
+✔ Always use a .gitignore file  
+
+---
+
+# 10. Recommended Project Structure
+
+    project/
+    ├── venv/
+    ├── src/
+    ├── tests/
+    ├── requirements.txt
+    ├── .gitignore
+    └── README.md
+
+---
+
+# Summary
+
+Git workflow simplified:
+
+Edit files
+    ↓
+git add
+    ↓
+git commit
+    ↓
+git push
+
+Mastering these commands covers about 90% of real-world Git usage.
