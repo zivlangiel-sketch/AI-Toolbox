@@ -1,18 +1,22 @@
+import os
+from dotenv import load_dotenv
 from openai import OpenAI
 
+# טעינת המשתנים מהכספת
+load_dotenv("../.env")
+
+# יצירת הלקוח - הוא יחפש אוטומטית משתנה בשם OPENAI_API_KEY
 client = OpenAI(
   base_url="https://openrouter.ai/api/v1",
-  api_key="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", 
+  api_key=os.getenv("OPENROUTER_API_KEY"),
+)
+# שליחת בקשה למודל
+response = client.chat.completions.create(
+    model="gpt-4o-mini", # מודל מעולה וזול להתחלה
+    messages=[
+        {"role": "system", "content": "You are a helpful coding assistant."},
+        {"role": "user", "content": "Write a Playwright login function in Python."}
+    ]
 )
 
-completion = client.chat.completions.create(
-  model="qwen/qwen3-vl-30b-a3b-thinking",
-  messages=[
-    {
-      "role": "user",
-      "content": "write a simple login functionality with playwright and python"
-    }
-  ]
-)
-
-print(completion.choices[0].message.content)
+print(response.choices[0].message.content)

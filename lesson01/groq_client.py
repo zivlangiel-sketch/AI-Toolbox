@@ -1,9 +1,15 @@
 import os
+from dotenv import load_dotenv
 from groq import Groq
 
-client = Groq(
-    api_key="gsk_YOUR_API_KEY_HERE",
-)
+# טעינת המשתנים מקובץ ה-.env לתוך המערכת
+load_dotenv()
+
+# שליפת המפתח מתוך ה"כספת"
+api_key = os.getenv("GROQ_API_KEY")
+
+# יצירת הלקוח של Groq עם המפתח ששלפנו
+client = Groq(api_key=api_key)
 
 chat_completion = client.chat.completions.create(
     messages=[
